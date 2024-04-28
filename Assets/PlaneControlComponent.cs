@@ -26,7 +26,8 @@ public class PlaneControlComponent : MonoBehaviour
 
     public KeyCode Right;
     public KeyCode Left;
-
+    public Animator LeftWingAnimator;
+    public Animator RightWingAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +40,14 @@ public class PlaneControlComponent : MonoBehaviour
     {
         if (Input.GetKeyDown(Right))
         {
+            //mAnimator.SetTrigger("LeftWingTrigger");
             isRightWingAttached = !isRightWingAttached;
+            LeftWingAnimator.SetBool("LeftWingAttached", isRightWingAttached);
         }
         if (Input.GetKeyDown(Left))
         {
             isLeftWingAttached = !isLeftWingAttached;
+            RightWingAnimator.SetBool("RightWingAttached", isLeftWingAttached);
         }
 
     }
