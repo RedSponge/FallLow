@@ -21,7 +21,7 @@ public class Collectible : MonoBehaviour
 
     public void Collect()
     {
-        AudioSource.PlayClipAtPoint(CollectionSound, gameObject.transform.position);
+        AudioSource.PlayClipAtPoint(CollectionSound, gameObject.transform.position, 0.5f);
         Destroy(gameObject);
     }
 }
