@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject player;
     public bool IsGameStarted;
-    public GameObject canvas;
+    public GameObject[] toHide;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,11 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
             GameObject[] objects = GameObject.FindGameObjectsWithTag("Collectible");
             if (objects.Length == 0)
             {
@@ -42,14 +47,20 @@ public class LevelManager : MonoBehaviour
     void StopGame()
     {
         IsGameStarted = false;
-        canvas.SetActive(true);
+        foreach (GameObject item in toHide)
+        {
+            item.SetActive(true);
+        }
         player.GetComponent<PlaneControlComponent>().enabled = false;
     }
 
     void StartGame()
     {
         IsGameStarted = true;
-        canvas.SetActive(false);
+        foreach (GameObject item in toHide)
+        {
+            item.SetActive(false);
+        }
         player.GetComponent<PlaneControlComponent>().enabled = true;
     }
 }
