@@ -127,8 +127,10 @@ public class PlaneControlComponent : MonoBehaviour
     {
         FallSpeed += FallGravity * delta;
         Vector3 euler = gameObject.transform.eulerAngles;
-        euler.x = 0;
-        euler.z = 0;
+        float desiredXRotation = 60;
+        float desiredZRotation = 0;
+        euler.x = Mathf.LerpAngle(euler.x, desiredXRotation, 1 * delta);
+        euler.z = Mathf.LerpAngle(euler.z, desiredZRotation, 1 * delta);
         gameObject.transform.eulerAngles = euler;
         gameObject.transform.Translate(Vector3.down * FallSpeed * delta, Space.World);
     }

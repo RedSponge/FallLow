@@ -1010,11 +1010,11 @@ MonoBehaviour:
   FallGravity: 10
   isLeftWingAttached: 0
   isRightWingAttached: 0
-  MaxRiseAngle: -30
+  MaxRiseAngle: -50
   MaxTiltAngle: 30
   DriftLerpSpeed: 3
   DriftDownwardAngle: 20
-  DriftRotationSpeed: 60
+  DriftRotationSpeed: 80
   DriftTiltAngle: 80
   Right: 100
   Left: 97
@@ -1028,7 +1028,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766055748}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.30008087, y: -0, z: -0, w: 0.9539138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7.161389, z: 0.106204085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1037,7 +1037,7 @@ Transform:
   - {fileID: 379295408}
   - {fileID: 1667929069}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -34.925, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &766055751
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1445,7 +1445,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.97866297, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.43137258, g: 0.25882354, b: 0.4156863, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2466,15 +2466,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7783dc243cf96c34a9da2b6a6722b5b2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99483657
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7783dc243cf96c34a9da2b6a6722b5b2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.101490416
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7783dc243cf96c34a9da2b6a6722b5b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 11.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7783dc243cf96c34a9da2b6a6722b5b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
