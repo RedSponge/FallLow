@@ -163,4 +163,15 @@ public class PlaneControlComponent : MonoBehaviour
     {
         return !isLeftWingAttached && !isRightWingAttached;
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered trigger!");
+        PlaneTriggerable triggerable = other.gameObject.GetComponent<PlaneTriggerable>();
+        if (triggerable != null)
+        {
+            triggerable.Trigger();
+        }
+        Debug.Log(other.gameObject.name);
+    }
 }
