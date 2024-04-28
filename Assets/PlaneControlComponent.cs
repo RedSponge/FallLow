@@ -38,17 +38,20 @@ public class PlaneControlComponent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(Right))
+        bool rightInput = Input.GetKeyDown(Right);
+        bool leftInput = Input.GetKeyDown(Left);
+        if (rightInput)
         {
             //mAnimator.SetTrigger("LeftWingTrigger");
             isRightWingAttached = !isRightWingAttached;
-            LeftWingAnimator.SetBool("LeftWingAttached", isRightWingAttached);
         }
-        if (Input.GetKeyDown(Left))
+        if (leftInput)
         {
             isLeftWingAttached = !isLeftWingAttached;
-            RightWingAnimator.SetBool("RightWingAttached", isLeftWingAttached);
         }
+
+        LeftWingAnimator.SetBool("LeftWingAttached", isRightWingAttached);
+        RightWingAnimator.SetBool("RightWingAttached", isLeftWingAttached);
 
     }
 
@@ -74,7 +77,7 @@ public class PlaneControlComponent : MonoBehaviour
                 DriftLeft(Time.fixedDeltaTime);
             }
         }     //     }
-        // }
+              // }
 
         // if (isFalling)
         // {
