@@ -13,48 +13,110 @@ public class PlaneControlComponent : MonoBehaviour
     public float FallGravity = 100;
     private float FallSpeed;
 
-    public bool isFalling;
+    public bool isLeftWingAttached;
+    public bool isRightWingAttached;
 
     public float MaxRiseAngle = -30;
     public float MaxTiltAngle = 30;
 
+    public float DriftLerpSpeed;
+    public float DriftDownwardAngle;
+    public float DriftRotationSpeed;
+    public float DriftTiltAngle;
+
+    public KeyCode Right;
+    public KeyCode Left;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        isFalling = false;
-
+        isLeftWingAttached = true;
+        isRightWingAttached = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(Right))
+        {
+            isRightWingAttached = !isRightWingAttached;
+        }
+        if (Input.GetKeyDown(Left))
+        {
+            isLeftWingAttached = !isLeftWingAttached;
+        }
+
     }
 
     void FixedUpdate()
     {
-        if (!isFalling)
+        if (!isLeftWingAttached && !isRightWingAttached)
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                StartFalling();
-            }
-            else
+            Fall(Time.fixedDeltaTime);
+        }
+        else
+        {
+            StopFalling();
+            if (isLeftWingAttached && isRightWingAttached)
             {
                 Glide(Time.fixedDeltaTime);
             }
-        }
+            else if (isLeftWingAttached)
+            {
+                DriftRight(Time.fixedDeltaTime);
+            }
+            else if (isRightWingAttached)
+            {
+                DriftLeft(Time.fixedDeltaTime);
+            }
+        }     //     }
+        // }
 
-        if (isFalling)
-        {
-            if (!Input.GetKey(KeyCode.Space))
-            {
-                StopFalling();
-            }
-            else
-            {
-                Fall(Time.fixedDeltaTime);
-            }
-        }
+        // if (isFalling)
+        // {
+        //     if (!Input.GetKey(KeyCode.Space))
+        //     {
+        //         StopFalling();
+        //     }
+        //     else
+        //     {
+        //         Fall(Time.fixedDeltaTime);
+        //     }
+        // }
+    }
+
+    private void DriftRight(float delta)
+    {
+        float desiredZRotation = -DriftTiltAngle;
+        float desiredXRotation = DriftDownwardAngle;
+        float deltaYRotation = DriftRotationSpeed;
+
+
+        Vector3 euler = gameObject.transform.eulerAngles;
+        euler.x = Mathf.LerpAngle(euler.x, desiredXRotation, DriftLerpSpeed * delta);
+        euler.z = Mathf.LerpAngle(euler.z, desiredZRotation, DriftLerpSpeed * delta);
+        euler.y += deltaYRotation * delta;
+
+        gameObject.transform.eulerAngles = euler;
+
+        gameObject.transform.Translate(Vector3.forward * Speed * delta);
+    }
+
+    private void DriftLeft(float delta)
+    {
+        float desiredZRotation = DriftTiltAngle;
+        float desiredXRotation = DriftDownwardAngle;
+        float deltaYRotation = -DriftRotationSpeed;
+
+
+        Vector3 euler = gameObject.transform.eulerAngles;
+        euler.x = Mathf.LerpAngle(euler.x, desiredXRotation, DriftLerpSpeed * delta);
+        euler.z = Mathf.LerpAngle(euler.z, desiredZRotation, DriftLerpSpeed * delta);
+        euler.y += deltaYRotation * delta;
+
+        gameObject.transform.eulerAngles = euler;
+
+        gameObject.transform.Translate(Vector3.forward * Speed * delta);
     }
 
     private void Fall(float delta)
@@ -69,18 +131,13 @@ public class PlaneControlComponent : MonoBehaviour
 
     private void StopFalling()
     {
-        isFalling = false;
-    }
-
-    private void StartFalling()
-    {
-        isFalling = true;
         FallSpeed = 0;
+        // isFalling = false;
     }
 
     private void Glide(float delta)
     {
-        float axis = Input.GetAxis("Horizontal");
+        float axis = 0; //Input.GetAxis("Horizontal");
 
         float desiredZRotation = axis * -MaxTiltAngle;
         Vector3 euler = gameObject.transform.localEulerAngles;
@@ -96,5 +153,10 @@ public class PlaneControlComponent : MonoBehaviour
         gameObject.transform.localEulerAngles = euler;
 
         gameObject.transform.Translate(Vector3.forward * Speed * delta);
+    }
+
+    public bool IsFalling()
+    {
+        return !isLeftWingAttached && !isRightWingAttached;
     }
 }

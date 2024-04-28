@@ -25,8 +25,8 @@ public class FollowCharacter : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 posOffset = planeControlComponent.isFalling ? FallOffset : GlideOffset;
-        Vector3 rot = planeControlComponent.isFalling ? FallRotation : GlideRotation;
+        Vector3 posOffset = planeControlComponent.IsFalling() ? FallOffset : GlideOffset;
+        Vector3 rot = planeControlComponent.IsFalling() ? FallRotation : GlideRotation;
 
         Vector3 desiredPosition = toFollow.transform.position + toFollow.transform.rotation * posOffset;
         Quaternion desiredRotation = Quaternion.LookRotation(toFollow.transform.position - desiredPosition) * Quaternion.Euler(rot);
