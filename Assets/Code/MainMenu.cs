@@ -8,17 +8,22 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        EnterScene("Scenes/Level 1 Fall Low");
+    }
+
+    public void EnterScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 
     public void QuitGame()

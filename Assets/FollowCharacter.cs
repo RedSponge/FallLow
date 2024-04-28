@@ -29,7 +29,12 @@ public class FollowCharacter : MonoBehaviour
         Vector3 posOffset = GlideOffset; // planeControlComponent.IsFalling() ? FallOffset : GlideOffset;
         Vector3 rot = GlideRotation; // planeControlComponent.IsFalling() ? FallRotation : GlideRotation;
 
-        Vector3 lookTowards = toFollow.transform.position + toFollow.transform.rotation * Vector3.forward * 4 + -Math.Sign(toFollow.transform.eulerAngles.x) * 2 * Vector3.up;
+        Vector3 lookTowards = toFollow.transform.position + toFollow.transform.rotation * Vector3.forward * 4;
+        if (planeControlComponent.IsFalling())
+        {
+            lookTowards += Vector3.up * -3;
+        }
+
         Vector3 desiredPosition = toFollow.transform.position + toFollow.transform.rotation * posOffset;
         Quaternion desiredRotation = Quaternion.LookRotation(lookTowards - desiredPosition) * Quaternion.Euler(rot);
 

@@ -24,8 +24,8 @@ public class PlaneControlComponent : MonoBehaviour
     public float DriftRotationSpeed;
     public float DriftTiltAngle;
 
-    public KeyCode Right;
-    public KeyCode Left;
+    // public KeyCode Right;
+    // public KeyCode Left;
     public Animator LeftWingAnimator;
     public Animator RightWingAnimator;
 
@@ -41,8 +41,8 @@ public class PlaneControlComponent : MonoBehaviour
 
     void Update()
     {
-        bool rightInput = Input.GetKeyDown(Right);
-        bool leftInput = Input.GetKeyDown(Left);
+        bool rightInput = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+        bool leftInput = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         if (rightInput)
         {
             //mAnimator.SetTrigger("LeftWingTrigger");
