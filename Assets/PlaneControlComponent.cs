@@ -29,6 +29,9 @@ public class PlaneControlComponent : MonoBehaviour
     public Animator LeftWingAnimator;
     public Animator RightWingAnimator;
 
+    public AudioSource AttachSound;
+    public AudioSource DetachSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +47,26 @@ public class PlaneControlComponent : MonoBehaviour
         {
             //mAnimator.SetTrigger("LeftWingTrigger");
             isRightWingAttached = !isRightWingAttached;
+            if (isRightWingAttached)
+            {
+                AttachSound.Play();
+            }
+            else
+            {
+                DetachSound.Play();
+            }
         }
         if (leftInput)
         {
             isLeftWingAttached = !isLeftWingAttached;
+            if (isLeftWingAttached)
+            {
+                AttachSound.Play();
+            }
+            else
+            {
+                DetachSound.Play();
+            }
         }
 
         LeftWingAnimator.SetBool("LeftWingAttached", isRightWingAttached);
